@@ -4,8 +4,9 @@
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "eslint:recommended",
+        "plugin:react/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -18,5 +19,11 @@
         "react"
     ],
     "rules": {
+        "no-console": "off",
+        "comma-dangle": "off",
+        "quotes": "off",
+        "react/prop-types": 0,
+        "arrow-body-style": 0,
+        "space-before-function-paren": 0
     }
 }
