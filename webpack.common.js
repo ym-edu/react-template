@@ -2,7 +2,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    // This makes use of Object Syntax, the most scalable way of defining entries. main and vendor are arbitrary names pertaining to their respective environment concerns.
+    // This makes use of Object Syntax, the most scalable way of defining entries.
+    // Main and vendor are arbitrary names pertaining to their respective environment concerns.
     main: "./src/index.js",
     vendor: "./src/vendor.js"
   },
@@ -23,6 +24,19 @@ module.exports = {
             esModule: false,
           }
         }
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react'
+            ],
+          },
+        },
       },
     ],
   },
