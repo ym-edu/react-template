@@ -5,6 +5,10 @@ const merge = require('webpack-merge');
 module.exports = merge(common, {
   mode: "development",
 
+  // Produces replicas of the source file before build without the extra webpack_require snippets.
+  // Useful for debugging purposes.
+  devtool: "source-map",
+
   module: {
     rules: [
       {
@@ -18,7 +22,7 @@ module.exports = merge(common, {
       },
     ],
   },
-  
+
   output: {
     filename: "[name].bundle.js", // MD5 Hashing; ':8' limits hash to 8 characters
     path: path.resolve(__dirname, "dist"),
