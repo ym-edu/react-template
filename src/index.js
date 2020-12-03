@@ -1,4 +1,11 @@
-import "./main.scss"
-import { app } from "./app/app.js"
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-console.log(app(), "| run from index.js");
+import "./main.scss";
+
+import element from './app/utils/util';
+import Component from './app/app';
+
+if (element) {
+  ReactDOM.render(<Component name="World" />, element);
+}

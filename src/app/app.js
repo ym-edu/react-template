@@ -1,5 +1,12 @@
-import { util } from "./utils/util.js"
+import React from 'react';
 
-export const app = () => {
-  return `${util()} and from app.js`;
-}
+const Hello = ({ name }) => {
+  return (
+    <h1>
+      Hello,
+      {name}
+    </h1>
+  );
+};
+
+export default Hello;
