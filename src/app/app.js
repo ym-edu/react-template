@@ -1,12 +1,8 @@
 import React from 'react';
+import Component from './components/Component';
 
-const Hello = ({ name }) => {
+export default function App() {
   return (
-    <h1>
-      Hello,
-      {name}
-    </h1>
+    <Component />
   );
-};
-
-export default Hello;
+}
