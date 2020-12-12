@@ -1,11 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './app/App';
 
 import "./main.scss";
 
-import element from './app/utils/util';
-import Component from './app/app';
-
-if (element) {
-  ReactDOM.render(<Component name="World" />, element);
-}
+ReactDOM.render(<App />, document.getElementById('root'));
