@@ -1,8 +1,9 @@
-const path = require ("path");
-const common = require("./webpack.common");
+const path = require("path");
 const merge = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const purgecss = require('@fullhuman/postcss-purgecss');
+const common = require("./webpack.common");
 
 module.exports = merge(common, {
   mode: "production",
@@ -24,7 +25,23 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader, // Extract CSS into files
           "css-loader", // Translates CSS into valid JS ↑
-          "postcss-loader", // Requires Tailwind.css ↑
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  require('tailwindcss'),
+                  require('autoprefixer')({}),
+                  require('cssnano')({ preset: 'default' }),
+                  purgecss({
+                    content: ['./src/**/*.html', './src/**/*.js']
+                  })
+                ],
+                // minimize: true
+              },
+            },
+          },
+          // "postcss-loader", // Requires Tailwind.css ↑
           "sass-loader" // Compiles SCSS into CSS ↑
         ],
       },
