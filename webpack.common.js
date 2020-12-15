@@ -5,9 +5,9 @@ module.exports = {
     // This makes use of Object Syntax, the most scalable way of defining entries.
     // Main and vendor are arbitrary names pertaining to their respective environment concerns.
     main: "./src/index.js",
-    vendor: "./src/vendor.js"
+    // vendor: "./src/vendor.js"
   },
-  
+
   module: {
     rules: [
       {
