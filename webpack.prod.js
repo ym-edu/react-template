@@ -9,23 +9,30 @@ module.exports = merge(common, {
   mode: "production",
 
   output: {
-    filename: "[name].[contenthash:8].bundle.js", // MD5 Hashing; ':8' limits hash to 8 characters
+    /* MD5 Hashing; ':8' limits hash to 8 characters */
+    filename: "[name].[contenthash:8].bundle.js",
     path: path.resolve(__dirname, "dist"),
-    // Files from github repo-deploy branch are copied over to netlify with the main path as root.
+    /* Files from github repo-deploy branch are copied over to netlify's root. */
     publicPath: '/',
-    // For github pages set:
+    /* For github pages set: */
     // publicPath: '/GH-USERNAME.github.io/',
   },
 
   module: {
     rules: [
       {
-        // webpack will come across the css file by importing it in the index.js
         test: /\.s[ac]ss$/i,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader, // Extract CSS into files
           "css-loader", // Translates CSS into valid JS ↑
           {
+            /*
+            Requires Tailwind.css ↑
+            Uses autoprefixer for css browser compatibility
+            Uses cssnano to minify purged output
+            Purges html & js files for unused css
+            */
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
@@ -34,15 +41,13 @@ module.exports = merge(common, {
                   require('autoprefixer')({}),
                   require('cssnano')({ preset: 'default' }),
                   purgecss({
-                    content: ['./src/**/*.html', './src/**/*.js']
-                  })
+                    content: ['./src/**/*.html', './src/**/*.js'],
+                  }),
                 ],
-                // minimize: true
               },
             },
           },
-          // "postcss-loader", // Requires Tailwind.css ↑
-          "sass-loader" // Compiles SCSS into CSS ↑
+          "sass-loader", // Compiles SCSS into CSS ↑
         ],
       },
     ],
@@ -52,6 +57,6 @@ module.exports = merge(common, {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash:8].css"
-    })
+    }),
   ],
 });
