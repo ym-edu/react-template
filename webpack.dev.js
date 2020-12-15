@@ -17,6 +17,7 @@ module.exports = merge(common, {
         use: [
           "style-loader", // Take that translation and inject it through the DOM
           "css-loader", // Translates CSS into valid JS ↑
+          "postcss-loader", // Requires Tailwind.css ↑
           "sass-loader" // Compiles SCSS into CSS ↑
         ],
       },

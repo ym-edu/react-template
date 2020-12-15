@@ -24,6 +24,7 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader, // Extract CSS into files
           "css-loader", // Translates CSS into valid JS ↑
+          "postcss-loader", // Requires Tailwind.css ↑
           "sass-loader" // Compiles SCSS into CSS ↑
         ],
       },
