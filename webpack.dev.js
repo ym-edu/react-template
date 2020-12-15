@@ -1,6 +1,8 @@
-const path = require ("path");
-const common = require("./webpack.common");
+const path = require("path");
 const merge = require('webpack-merge');
+const purgecss = require('@fullhuman/postcss-purgecss');
+const common = require("./webpack.common");
+
 
 module.exports = merge(common, {
   mode: "development",
@@ -17,7 +19,21 @@ module.exports = merge(common, {
         use: [
           "style-loader", // Take that translation and inject it through the DOM
           "css-loader", // Translates CSS into valid JS ↑
-          "postcss-loader", // Requires Tailwind.css ↑
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  require('tailwindcss'),
+                  purgecss({
+                    content: ['./src/**/*.html', './src/**/*.js']
+                  })
+                ],
+                // minimize: true
+              },
+            },
+          },
+          // "postcss-loader", // Requires Tailwind.css ↑
           "sass-loader" // Compiles SCSS into CSS ↑
         ],
       },
