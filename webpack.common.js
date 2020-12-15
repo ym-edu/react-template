@@ -1,21 +1,28 @@
+const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  /* This makes use of Object Syntax
+  the most scalable way of defining entries. */
   entry: {
-    // This makes use of Object Syntax, the most scalable way of defining entries.
-    // Main and vendor are arbitrary names pertaining to their respective environment concerns.
+    /* Main and vendor are arbitrary names pertaining
+    to their respective environment concerns. */
     main: "./src/index.js",
-    vendor: "./src/vendor.js"
+    // vendor: "./src/vendor.js"
   },
-  
+
   module: {
     rules: [
       {
         test: /\.html$/i,
+        include: path.resolve(__dirname, 'src'),
+        exclude: /node_modules/,
         use: ["html-loader"]
       },
       {
         test: /\.(svg|png|jpg|jpeg|gif)$/i,
+        include: path.resolve(__dirname, 'src'),
+        exclude: /node_modules/,
         use: {
           loader: "file-loader",
           options: {
@@ -27,6 +34,7 @@ module.exports = {
       },
       {
         test: /\.m?js$/,
+        include: path.resolve(__dirname, 'src'),
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -46,4 +54,7 @@ module.exports = {
       template: './src/template.html',
     }),
   ],
+  optimization: {
+    runtimeChunk: true
+  }
 };
