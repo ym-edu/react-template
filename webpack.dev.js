@@ -2,7 +2,8 @@ const merge = require('webpack-merge');
 const common = require("./webpack.common");
 
 module.exports = merge(common, {
-  mode: "development",
+  mode: "development", // Sets env.mode to development
+
   /* Produces replicas of source files before build without the extra webpack_require snippets.
   Useful for debugging purposes.
   Increases build time */

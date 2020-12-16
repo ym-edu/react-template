@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const common = require("./webpack.common");
 
 module.exports = merge(common, {
-  mode: "production",
+  mode: "production", // Sets env.mode to production
 
   output: {
     /* MD5 Hashing; ':8' limits hash to 8 characters */
