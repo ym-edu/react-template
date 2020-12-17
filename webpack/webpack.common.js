@@ -1,4 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+/* - NOTE: dotenv -
+Load env config either in webpack or app:
+// require('dotenv').config();
+Test with:
+// console.log("MY_ENV_LOG", process.env.EXAMPLE_ENV);
+*/
 
 module.exports = {
   /* This makes use of Object Syntax, the most scalable way of defining entries. */
@@ -33,10 +39,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react'
-            ],
+            presets: ['@babel/preset-env', '@babel/preset-react']
           },
         },
       },
