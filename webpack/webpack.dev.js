@@ -1,3 +1,4 @@
+const path = require("path");
 const merge = require('webpack-merge');
 const common = require("./webpack.common");
 
@@ -17,7 +18,14 @@ module.exports = merge(common, {
         use: [
           "style-loader", // Take that translation and inject it through the DOM
           "css-loader", // Translates CSS into valid JS ↑
-          "postcss-loader",
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                config: path.resolve(__dirname, 'postcss.config.js'),
+              },
+            },
+          },
           "sass-loader", // Compiles SCSS into CSS ↑
         ],
       },

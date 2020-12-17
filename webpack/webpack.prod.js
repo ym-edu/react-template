@@ -10,7 +10,7 @@ module.exports = merge(common, {
   output: {
     /* MD5 Hashing; ':8' limits hash to 8 characters */
     filename: "[name].[contenthash:8].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "../dist"),
     /* Files from github repo-deploy branch are copied over to netlify's root. */
     publicPath: '/',
     /* For github pages set: */
@@ -25,7 +25,14 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader, // Extract CSS into files
           "css-loader", // Translates CSS into valid JS ↑
-          "postcss-loader",
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                config: path.resolve(__dirname, 'postcss.config.js'),
+              },
+            },
+          },
           "sass-loader", // Compiles SCSS into CSS ↑
         ],
       },
